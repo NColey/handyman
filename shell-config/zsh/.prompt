@@ -1,0 +1,30 @@
+################################ Terminal Prompt ########################################
+
+# Reference
+# %~ working directory
+# U+2605 ASCII star unicode
+# U+1F4AB Dizzy emoji unicode
+# %F{color} foreground color
+# %F{8} dark grey
+
+
+function parse_git_branch {
+  if [ -d .git ]; then
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  fi;
+}
+
+
+function display_git_email {
+  if [ -d .git ]; then
+    EMAIL="$(command git config --get user.email 2>/dev/null)}"
+    echo "${EMAIL%%@*}"
+  fi;
+}
+
+# Build Prompt
+function customize_prompt {
+  export PS1=$'%F{8}%~ %F{167}$(parse_git_branch) %F{111}$(display_git_email) %F{8}\U2605 %F{black} '
+}
+
+customize_prompt
