@@ -1,5 +1,4 @@
-# ######################### Source Environment Variables ################################
-#
+# ######################### Source Environment Variables #################################
 
 if [ -s ~/.moda_envars ]; then
   source ~/.moda_envars;
